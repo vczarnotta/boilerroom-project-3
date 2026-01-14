@@ -1,34 +1,103 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+
+// alert that uses children
+function Alert({children}) {
+  return (
+    <div style={{color: "red", fontWeight: "bold", marginBottom: "20px"}}>
+      {children}
+    </div>
+  )
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [gold, setGold] = useState(0);
+  const [treasures, setTreasures] = useState(["Gammal stövel"]);
+  const [news, setNews] = useState("Laddar nyheter");
+  const [playerName, setPlayerName] = useState("");
+  const [tempName, setTempName] = useState("");
+
+  useEffect(() => {
+    console.log("Vaktmästare ser att du nu har " + gold + " guld!");
+    if (gold === 20) {
+      alert("du är zupa rich!")
+    }
+  }, [gold]);
+  
+  
+  const handleDig = () => {
+    setGold(gold + 1);
+    setTreasures([...treasures, "Guldmynt"]);
+  }
+ 
+  // prevent page reload and save name
+  const saveName = (e) => {
+    e.preventDefault();
+    setPlayerName(tempName);
+  }
+
+  // get news from api at initial page load
+  useEffect(() => {
+    const getNews = async () => {
+      try {
+        const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+        const data = await res.json();
+        setNews(data.title)
+      } catch (error) {
+        console.error("getting news failed, error: " + error);
+        setNews("kunde inte nå servern.");
+      }
+    }
+
+    getNews();
+  }, []);
+  
 
   return (
-    <>
+    <div style={{textAlign: "center", margin: "50px 500px" }}>
+      {/* visa spelarnamn */}
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>Gold digger: {playerName}</h1>
+        <form onSubmit={saveName}>
+          <label>Skriv ditt namn:</label>
+          <input 
+            style={{marginTop: "10px", marginBottom: "60px", padding: "7px 20px", textAlign: "center"}}
+            type="text"
+            
+            onChange={(e) => setTempName(e.target.value)} 
+          />
+        </form>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      {/* visa guld */}
+      <div>
+        <h2>guld = {gold}</h2>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          {gold >= 10 ? "rich" : "poor, dig more"}
+        </p>
+        {gold < 5 && (
+          <Alert>Varning: Du behöver mer guld!</Alert>
+        )}
+        <button onClick={() => handleDig()}>gräv</button>
+      </div>
+
+        {/* visa historik */}
+      <div>
+        <h3>Min Skattekista:</h3>
+        <ul style={{textAlign: "left"}}>
+          {treasures.map((item, index) => (
+            <li key={index}>
+              Hittat föremål: {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      {/* visa api resultat */}
+      <div>
+        <p>
+          todays API news: {news}
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
