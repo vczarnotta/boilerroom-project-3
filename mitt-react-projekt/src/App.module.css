@@ -78,3 +78,11 @@
 .read-the-docs {
   color: #888;
 }
+
+.btn {
+  color: #2563eb;
+}
+
+.active {
+  color: green;
+}

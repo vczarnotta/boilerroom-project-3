@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import Timer from './components/Timer/Timer';
+import styles from "./App.module.css";
 
 // alert that uses children
 function Alert({children}) {
@@ -15,6 +17,7 @@ function App() {
   const [news, setNews] = useState("Laddar nyheter");
   const [playerName, setPlayerName] = useState("");
   const [tempName, setTempName] = useState("");
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     console.log("Vaktmästare ser att du nu har " + gold + " guld!");
@@ -25,8 +28,12 @@ function App() {
   
   
   const handleDig = () => {
+    // adjust gold
     setGold(gold + 1);
     setTreasures([...treasures, "Guldmynt"]);
+
+    // flip active state
+    setIsActive(!isActive)
   }
  
   // prevent page reload and save name
@@ -67,6 +74,10 @@ function App() {
           />
         </form>
       </div>
+      {/* timer */}
+      <div>
+        <Timer></Timer>
+      </div>
       {/* visa guld */}
       <div>
         <h2>guld = {gold}</h2>
@@ -76,7 +87,9 @@ function App() {
         {gold < 5 && (
           <Alert>Varning: Du behöver mer guld!</Alert>
         )}
-        <button onClick={() => handleDig()}>gräv</button>
+        <button
+        className={`${styles.btn} ${isActive ? styles.active : ""}`} 
+        onClick={() => handleDig()}>gräv</button>
       </div>
 
         {/* visa historik */}
