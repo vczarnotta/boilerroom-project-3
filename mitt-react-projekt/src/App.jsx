@@ -1,4 +1,5 @@
 import EnergyLogger from './components/EnergyLogger/EnergyLogger'
+import Timer from "./components/Timer/Timer"
 import './App.css'
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     return (
         <>
             <EnergyLogger />
+            <Timer />
         </>
     )
 }
