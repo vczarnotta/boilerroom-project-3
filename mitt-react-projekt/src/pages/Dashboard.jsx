@@ -1,0 +1,22 @@
+import Header from "../components/Header/Header"
+import Card from "../components/Cards/Cards"
+
+function Dashboard() {
+    return(
+        <>
+        <Header />
+        <main>
+            <Card 
+                title={"Titel"}
+                description={"Beskrivning"}
+            />
+            <Card 
+                title={"Titel"}
+                description={"Beskrivning"}
+            />
+        </main>
+        </>
+    )
+}
+
+export default Dashboard
