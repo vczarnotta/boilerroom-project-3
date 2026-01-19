@@ -1,24 +1,35 @@
 import { useState } from 'react';
 
+//sessions = array med arbetspass (själva historiken)
+// onEdit = funktionen som göra att vi kan redigera sessions
+// onDelete = funktionen som gör att vi kan ta bort sessions
+//editingId = det unika id på varje pass (se format på mockWorkSessions)
+//setEditingId = funktion som uppdaterar editingId
+//useState(null) = i början så redigeras inget pass så därför är värdet null
+//draft är temporär kopia av session medan man redigerar det. Behövs för att man inte ska ändra originaldatan direkt. Användaren ska kunna avbryta redigeringen
 function HistoryList({ sessions, onEdit, onDelete}) {
   const [editingId, setEditingId] = useState(null);
   const [draft, setDraft] = useState(null);
 
+  //STARTA EDIT = funktionen som pekar på det specifika passet användaren klickade redigera på. Spread operatorn gör temporär kopia > ...session
   function startEdit(session) {
     setEditingId(session.id);
     setDraft({ ...session });
   }
 
+  //CANCEL EDIT = funktionen för att avbryta en redigering av en session. null är för att ingen session längre är i edit läge. setDraft blir ett slängt utkast då ändringar försvinner när användaren klickar på avbryt
   function cancelEdit() {
     setEditingId(null);
     setDraft(null);
   }
 
+  //SAVE EDIT = funktionen som sparar alla ändringar i det specifika session användaren tryckt edit för. onEdit anropas här från parent-komponenten längst upp. draft.id = pass som ska uppdateras, draft = de nya värdena
   function saveEdit() {
     onEdit(draft.id, draft);
-    cancelEdit();
+    cancelEdit(); //detta gör så att vi kan avsluta edit läge efter sparande
   }
 
+  //RENDERING
   return (
     <div>
       {sessions.map((session) => {
@@ -26,15 +37,17 @@ function HistoryList({ sessions, onEdit, onDelete}) {
         const isEditing = session.id === editingId;
 
         return (
-          <div
-            key={session.id}
+          <div //grundlig css style för UI för HistoryList
+            key={session.id} //key är krav vid list-rendering i React (key används så att React förstår vad som har ändrats)
             style={{
               border: "1px solid #ccc",
               marginBottom: 10,
               padding: 10,
             }}
           >
+            
             {!isEditing ? (
+              //om passet inte redigeras ska det visa läsläge. om det redigeras så ska det visa edit läge
               <>
                 <p>
                   <strong>{session.title}</strong>
@@ -57,18 +70,20 @@ function HistoryList({ sessions, onEdit, onDelete}) {
                 </button>
               </>
             ) : (
+              
+              //EDIT LÄGE
               <>
                 <input
-                  value={draft.title}
-                  onChange={(e) =>
+                  value={draft.title} //gäller endast för title
+                  onChange={(e) => //triggas varje gång user skriver
                     setDraft({
-                      ...draft,
-                      title: e.target.value,
+                      ...draft, //behåll allt annat
+                      title: e.target.value, //uppdatera title
                     })
                   }
                   />
 
-                  <select
+                  <select //Dropdown för sessionType
                     value={draft.sessionType}
                     onChange={(e) =>
                       setDraft({
@@ -82,7 +97,7 @@ function HistoryList({ sessions, onEdit, onDelete}) {
                     <option>Paus</option>
                   </select>
 
-                  <select
+                  <select //Dropdown för energinivå
                     value={draft.energyLevel}
                     onChange={(e) => 
                       setDraft({
@@ -91,7 +106,7 @@ function HistoryList({ sessions, onEdit, onDelete}) {
                       })
                     }
                   >
-                    {[1, 2, 3, 4, 5].map((lvl) => (
+                    {[1, 2, 3, 4, 5].map((lvl) => ( //array av energy nivåer 1-5, renderas som dropdown
                       <option key={lvl} value={lvl}>
                         {lvl}
                       </option>
