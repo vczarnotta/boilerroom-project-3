@@ -7,8 +7,9 @@ function Dashboard() {
         <Header />
         <main>
             <Card 
-                title={"Titel"}
-                description={"Beskrivning"}
+                // Lägg koppling till antalet tasks här
+                title={"0/0"}
+                description={"Uppgifter"}
             />
             <Card 
                 title={"Titel"}
