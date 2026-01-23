@@ -1,6 +1,9 @@
 import "./Header.css"
+import menuItems from "./navData"
 
-function Sidebar () {
+/* Kanske lägga till visuell effekt för aktiva sidan? */
+
+function Header ({changePage, activePage}) {
 
   return (
     <header>
@@ -8,13 +11,22 @@ function Sidebar () {
         
         <nav>
           <ul>
-              <li>Item 1</li>
-              <li>Item 2</li>
-              <li>Item 3</li>
+              {/* Gå igenom arrayen och mappa ut */}
+              {menuItems.map((item) => (
+                <li
+                  key={item.title}
+                  className={activePage === item.title ? "active" : ""}
+                >
+                  <a onClick={ () => changePage(item.title)}>
+                    <span className="icon">{item.icon}</span>
+                    <span>{item.title}</span>
+                  </a>
+                </li>
+              ))}
           </ul>
         </nav>
     </header>
   );
 }
 
-export default Sidebar;
+export default Header;
