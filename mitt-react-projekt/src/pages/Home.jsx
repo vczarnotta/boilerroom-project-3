@@ -1,38 +1,28 @@
-import Header from "../components/Header/Header"
 import GridContainer from "../components/GridContainer/GridContainer"
 import Card from "../components/Cards/Cards"
 
 function Home() {
   return(
     <div className="main-container">
-      <GridContainer columns={4}>
+      {/* En grid med 2 kolumner */}
+      <GridContainer columns={2}>
         <Card
-          // Här hämtas tiden från historik
-          title={"1h"}
-          children={<p>Fokustid idag</p>}
+          title={"Titel"}
         />
 
         <Card
-          // Här hämtas tiden från historik
-          title={"12h"}
-          children={<p>Fokustid senaste veckan</p>}
-        />
-
-        <Card
-          //Här dyker ett peppande citat upp
-          title={<p>PEPP!!!</p>}
-          span={2}
+          title={"Titel"}
         />
       </GridContainer>
 
+      {/* fullheight={true} sträcker ut containern för att fylla resten av sidan */}
       <GridContainer columns={2} fullheight={true}>
         <Card
-          title={<p>Starta timer</p>}
+          title={"Titel"}
         />
 
         <Card
-          title={<p>Uppgifter</p>}
-          children={<p>Här listas uppgifter från ToDos</p>}
+          title={"Titel"}
         />
       </GridContainer>
     </div>
