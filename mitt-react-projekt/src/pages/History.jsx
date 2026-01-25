@@ -45,7 +45,7 @@ function History() {
 
   //RENDERING
   return (
-    <div>
+    <section className="history-page">
       <h1>Historik</h1>
 
       <HistoryList //renderar HistoryList och skickar in:
@@ -53,7 +53,7 @@ function History() {
         onEdit={handleEdit} //callback för redigering
         onDelete={handleDelete} //callback för borttagning
       />
-    </div>
+    </section>
   );
 }
 

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import "./HistoryList.css";
 
 //sessions = array med arbetspass (själva historiken)
 // onEdit = funktionen som göra att vi kan redigera sessions
@@ -31,7 +32,7 @@ function HistoryList({ sessions, onEdit, onDelete}) {
 
   //RENDERING
   return (
-    <div>
+    <div className="history-list">
       {sessions.map((session) => {
 
         const isEditing = session.id === editingId;
@@ -39,82 +40,84 @@ function HistoryList({ sessions, onEdit, onDelete}) {
         return (
           <div //grundlig css style för UI för HistoryList
             key={session.id} //key är krav vid list-rendering i React (key används så att React förstår vad som har ändrats)
-            style={{
-              border: "1px solid #ccc",
-              marginBottom: 10,
-              padding: 10,
-            }}
+            className="history-card"
           >
             
             {!isEditing ? (
               //om passet inte redigeras ska det visa läsläge. om det redigeras så ska det visa edit läge
               <>
-                <p>
+                <p className="history-title">
                   <strong>{session.title}</strong>
                 </p>
 
-                <p>
+                <p className="history-meta">
                   {session.date} {session.startTime}-{session.endTime}
                 </p>
 
-                <p>
+                <p className="history-info">
                   {session.sessionType} | Energi: {session.energyLevel}/5
                 </p>
 
-                <button onClick={() => startEdit(session)}>
-                  Redigera
-                </button>
+                <div className="history-actions">
+                  <button className="btn-base btn-light" onClick={() => startEdit(session)}>
+                    Redigera
+                  </button>
 
-                <button onClick={() => onDelete(session.id)}>
-                  Ta bort
-                </button>
+                  <button className="btn-base btn-dark" onClick={() => onDelete(session.id)}>
+                    Ta bort
+                  </button>
+                </div>
               </>
             ) : (
               
               //EDIT LÄGE
               <>
-                <input
-                  value={draft.title} //gäller endast för title
-                  onChange={(e) => //triggas varje gång user skriver
-                    setDraft({
-                      ...draft, //behåll allt annat
-                      title: e.target.value, //uppdatera title
-                    })
-                  }
-                  />
-
-                  <select //Dropdown för sessionType
-                    value={draft.sessionType}
-                    onChange={(e) =>
+                <div className="history-edit">
+                  <input className="history-input"
+                    value={draft.title} //gäller endast för title
+                    onChange={(e) => //triggas varje gång user skriver
                       setDraft({
-                        ...draft,
-                        sessionType: e.target.value,
+                        ...draft, //behåll allt annat
+                        title: e.target.value, //uppdatera title
                       })
                     }
-                  >
-                    <option>Deep Work</option>
-                    <option>Möte</option>
-                    <option>Paus</option>
-                  </select>
+                    />
 
-                  <select //Dropdown för energinivå
-                    value={draft.energyLevel}
-                    onChange={(e) => 
-                      setDraft({
-                        ...draft,
-                        energyLevel: Number(e.target.value),
-                      })
-                    }
-                  >
-                    {[1, 2, 3, 4, 5].map((lvl) => ( //array av energy nivåer 1-5, renderas som dropdown
-                      <option key={lvl} value={lvl}>
-                        {lvl}
-                      </option>
-                    ))}
-                  </select>
+                    <select className="history-select" //Dropdown för sessionType
+                      value={draft.sessionType}
+                      onChange={(e) =>
+                        setDraft({
+                          ...draft,
+                          sessionType: e.target.value,
+                        })
+                      }
+                    >
+                      <option>Deep Work</option>
+                      <option>Möte</option>
+                      <option>Paus</option>
+                    </select>
 
-                  <button onClick={saveEdit}>Spara</button>
-                  <button onClick={cancelEdit}>Avbryt</button>
+                  <div className="history-edit-footer">
+                      <select className="history-energy" //Dropdown för energinivå
+                        value={draft.energyLevel}
+                        onChange={(e) => 
+                          setDraft({
+                            ...draft,
+                            energyLevel: Number(e.target.value),
+                          })
+                        }
+                      >
+                        {[1, 2, 3, 4, 5].map((lvl) => ( //array av energy nivåer 1-5, renderas som dropdown
+                          <option key={lvl} value={lvl}>
+                            {lvl}
+                          </option>
+                        ))}
+                      </select>  
+
+                      <button className="btn-base btn-light" onClick={saveEdit}>Spara</button>
+                      <button className="btn-base" onClick={cancelEdit}>Avbryt</button>
+                  </div>
+                </div>
               </>
             )}
           </div>
