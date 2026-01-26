@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 // useState = sparar data i komponenten
 //useEffect = gör så att vi kan köra kod som en effekt när något ändras
 
-import { mockWorkSessions } from "../history/mockWorkSessions.jsx";
-import HistoryList from "./history/HistoryList"; //importerar UI delen för History
+import { mockWorkSessions } from "./mockWorkSessions.jsx";
+import HistoryList from "./HistoryList"; //importerar UI delen för History
 
-function History() {
+function HistoryLogic() {
   const [sessions, setSessions] = useState(() => {
     const saved = localStorage.getItem("workSessions"); // sparar i webbläsaren, vid refresh så finns det kvar
 
@@ -57,4 +57,4 @@ function History() {
   );
 }
 
-export default History
+export default HistoryLogic
