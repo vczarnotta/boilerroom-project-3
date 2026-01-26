@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./Timer.module.css";
+import Button from "../Button/Button"
 
 function Timer() {
   const [milliseconds, setMilliseconds] = useState(0);
@@ -40,9 +41,9 @@ function Timer() {
     <>
       <div className="time-display">{`${time.hours}h : ${time.minutes}min : ${time.seconds}s`}</div>
       <div className={styles.buttons}>
-        <button onClick={() => setTimerToggle(true)}>Start</button>
-        <button onClick={() => setTimerToggle(false)}>Stop</button>
-        <button onClick={resetTimer}>Reset</button>
+        <Button onClick={() => setTimerToggle(true)}>Start</Button>
+        <Button onClick={() => setTimerToggle(false)}>Stop</Button>
+        <Button onClick={resetTimer}>Reset</Button>
       </div>
     </>
   )
