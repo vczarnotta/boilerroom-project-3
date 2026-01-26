@@ -5,7 +5,7 @@ import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Tasks from  "./pages/Tasks"
 import Timer from "./pages/Timer"
-import History from "./pages/History"
+import HistoryPage from "./pages/History"
 
 //Mappar sidnamn till komponenter för dynamisk rendering
 const pages = {
