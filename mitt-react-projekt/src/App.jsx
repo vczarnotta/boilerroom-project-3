@@ -13,7 +13,7 @@ const pages = {
   Dashboard: <Dashboard />,
   Tasks: <Tasks />,
   Timer: <Timer />,
-  History: <History />
+  History: <HistoryPage />
 }
 
 function App() {

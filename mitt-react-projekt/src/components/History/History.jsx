@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { mockWorkSessions } from "./mockWorkSessions.jsx";
 import HistoryList from "./HistoryList"; //importerar UI delen för History
 
-function HistoryLogic() {
+function History() {
   const [sessions, setSessions] = useState(() => {
     const saved = localStorage.getItem("workSessions"); // sparar i webbläsaren, vid refresh så finns det kvar
 
@@ -57,4 +57,4 @@ function HistoryLogic() {
   );
 }
 
-export default HistoryLogic
+export default History

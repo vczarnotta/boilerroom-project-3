@@ -1,6 +1,6 @@
-import HistoryLogic from "../components/History/History"
+import History from "../components/History/History"
 
-function History() {
+function HistoryPage() {
   return(
     <div className="main-container">
       < HistoryLogic />
@@ -8,4 +8,4 @@ function History() {
   )
 }
 
-export default History
+export default HistoryPage
