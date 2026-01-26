@@ -4,15 +4,15 @@ import Header from './components/Header/Header'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Tasks from  "./pages/Tasks"
-import Timer from "./pages/Timer"
+import TimerPage from './pages/Timerpage'
 import HistoryPage from "./pages/History"
-
+ 
 //Mappar sidnamn till komponenter för dynamisk rendering
 const pages = {
   Home: <Home />,
   Dashboard: <Dashboard />,
   Tasks: <Tasks />,
-  Timer: <Timer />,
+  Timer: <TimerPage />,
   History: <HistoryPage />
 }
 
