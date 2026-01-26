@@ -1,4 +1,4 @@
-function Timer() {
+function Dashboard() {
   return(
     <div className="main-container">
 
@@ -6,4 +6,4 @@ function Timer() {
   )
 }
 
-export default Timer
+export default Dashboard

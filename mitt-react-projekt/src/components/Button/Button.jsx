@@ -3,7 +3,7 @@ import './Button.css'
 
 // component for a button with light and dark mode styles
 function MyButton({children, onClick, isDarkMode = false, variant = 'default', ...props }){
-// 1. Determine base theme (Light/Dark)
+// Determine base theme (Light/Dark)
     let themeClass = isDarkMode ? 'btn-dark' : 'btn-light';
 
     if (variant === 'orange'){
