@@ -6,7 +6,7 @@ import Dashboard from './pages/Dashboard'
 import Tasks from  "./pages/Tasks"
 import TimerPage from './pages/Timerpage'
 import HistoryPage from "./pages/History"
-
+ 
 //Mappar sidnamn till komponenter för dynamisk rendering
 const pages = {
   Home: <Home />,
