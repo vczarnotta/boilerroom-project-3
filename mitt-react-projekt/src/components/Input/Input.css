@@ -1,3 +1,4 @@
+/* Container for the entire input component */
 .inputContainer {
   display: flex;
   flex-direction: column;
@@ -25,7 +26,9 @@
 }
 
 /* Light Mode Template Styles */
-.labelLight { color: #374151;}
+.labelLight { 
+  color: #374151;
+}
 .inputLight {
   background-color: #ffffff;
   border-color: #d1d5db;
@@ -37,20 +40,30 @@
 }
 
 /* Dark Mode Template Styles */
-.labelDark { color: #e5e7eb; }
+.labelDark { 
+  color: #e5e7eb;
+ }
+
 .inputDark {
   background-color: #1f2937;
   border-color: #374151;
   color: #ffffff;
 }
-.inputDark::placeholder { color: #9ca3af; }
+
+.inputDark::placeholder { 
+  color: #9ca3af;
+ }
+
 .inputDark:focus {
   border-color: #8b5cf6;
   box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
 }
 
 /* Error States */
-.inputError { border-color: #ef4444 !important; }
+.inputError { 
+  border-color: #ef4444 !important;
+ }
+
 .errorText {
   color: #ef4444;
   font-size: 12px;
