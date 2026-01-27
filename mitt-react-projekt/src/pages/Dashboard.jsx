@@ -1,4 +1,4 @@
-function Tasks() {
+function Dashboard() {
   return(
     <div className="main-container">
 
@@ -6,4 +6,4 @@ function Tasks() {
   )
 }
 
-export default Tasks
+export default Dashboard
