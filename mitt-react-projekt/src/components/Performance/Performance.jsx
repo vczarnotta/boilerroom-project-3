@@ -1,9 +1,10 @@
 import { useState } from "react"
-import "./EnergyLogger.css"
+import Button from "../Button/Button"
+import "./Performance.css"
 
-function EnergyLogger({onLevelSelect}) {
+function Performance({onPerformanceSelect}) {
   // Lista över tillgängliga energinivåer med tillhörande beskrivningar
-  const energyLevels = [
+  const performanceLevels = [
     {level: 1, description: "Mycket låg" },
     {level: 2, description: "Låg" },
     {level: 3, description: "Medel" },
@@ -12,44 +13,45 @@ function EnergyLogger({onLevelSelect}) {
   ]
 
   // Lokal state för att hålla koll på vilken nivå som är vald
-  const [energy, setEnergy] = useState(0)
+  const [permormance, setPerformance] = useState(0)
 
   //Uppdaterar både lokal state och informerar föräldrakomponenten vid klick på energinivå-knapp
   const handleClick = (level) => {
 
     //Om man klickar på samma knapp igen ska den avväljas annars sätt till level
-    const newLevel = energy === level ? 0 : level
+    const newLevel = permormance === level ? 0 : level
 
     // Uppdatera state med det nya värdet
-    setEnergy(newLevel)
+    setPerformance(newLevel)
 
     // Skickar värdet vidare så att det kan sparas i historiken, om funktionen finns och något värde är valt
-    onLevelSelect ? onLevelSelect(newLevel) : null
+    onPerformanceSelect ? onPerformanceSelect(newLevel) : null
   }
 
   return(
     <div>
-      <h3>Hur var din energinivå under passet?</h3>
+      <h2>Hur var din prestation under passet?</h2>
 
       <div className="button-group">
       {/* Skapa en knapp för varje energinivå */}
-      {energyLevels.map((energyLevel) => (
-        <button
-        className="button"
-        key={energyLevel.level}
-        onClick={() => handleClick(energyLevel.level)}
+      {performanceLevels.map((performanceLevel) => (
+        <Button
+        key={performanceLevel.level}
+        onClick={() => handleClick(performanceLevel.level)}
         >
-            <span className="energy-level">{energyLevel.level}</span>
-            <span className="energy-description">{energyLevel.description}</span>
-        </button>
+          <p className="button-content">
+            <span className="performance-level">{performanceLevel.level}</span>
+            <span className="performance-description">{performanceLevel.description}</span>
+          </p>
+        </Button>
       ))}
       </div>
 
       {/*För kontroll att det fungerar*/}
-      <p>Vald nivå: {energy > 0 ? energy : "ingen vald ännu"}</p>
+      <p>Vald nivå: {permormance > 0 ? permormance : "ingen vald ännu"}</p>
 
     </div>
   )
 }
 
-export default EnergyLogger
+export default Performance
