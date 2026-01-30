@@ -4,21 +4,23 @@
   gap: var(--space-md);
 }
 
-.button {
+.button-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: var(--space-md), var(--space-sm);
+  width: 100%;
 }
 
-.energy-level {
+.performance-level {
   background-color: var(--color-accent);
   color: var(--color-bg);
   padding: var(--space-sm);
-  width: var(--space-lg);
-  height: var(--space-lg);
+  width: var(--space-xl);
+  height: var(--space-xl);
   border-radius: var(--radius-pill);    
 }
 
-.energy-description {
+.performance-description {
   flex-grow: 1;
 }
